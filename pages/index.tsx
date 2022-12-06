@@ -13,6 +13,7 @@ import clientPromise from '../lib/mongodb'
 import styles from '../styles/Home.module.css'
 import { useContext, useState } from 'react';
 import { ModalContext } from '../utils/ModalContext';
+import Form from '../components/Form';
 
 interface User {
   _id: string,
@@ -48,7 +49,7 @@ export default function Home({users}: any) {
         <h1 className={styles.title}>
           Control <a href="https://en.wikipedia.org/wiki/Panel">Panel</a>
         </h1>
-        <Container sx={{width: '100%'}}>
+        <Container sx={{width: '100%', pt: 2}}>
         <TableContainer >
             <Table sx={{ minWidth: { vs: 450 } }} >
                 <TableHead>
