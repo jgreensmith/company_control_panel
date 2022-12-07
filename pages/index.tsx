@@ -24,21 +24,25 @@ interface User {
   connectedAccount?: string,
   orders?: Array<object>,
   holidayMode?: boolean,
-  canceled?: boolean
+  canceled?: boolean,
+  pid?: string,
+  manage_inventory?: string,
+  preview_mode?: string
 }
 
 
 export default function Home({users}: any) {
 
-  const { setModalOpen, modalOpen } = useContext(ModalContext);
+  const { setModalOpen, modalOpen, setCurrentId } = useContext(ModalContext);
 
 
   const handleClick = (id: string) => {
     setModalOpen(true)
+    setCurrentId(id)
   }
   
 
-  console.log(users)
+  console.log({users})
   return (
     <div className={styles.container}>
       <Head>
@@ -66,7 +70,7 @@ export default function Home({users}: any) {
                       hover
                       onClick={() => handleClick(user._id)}
                       key={user._id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
                     >
                         <TableCell component="th" scope="row">
                         {user.email}
@@ -87,7 +91,7 @@ export default function Home({users}: any) {
         onClose={() => setModalOpen(false)}
        
         >
-          <Form />
+          <Form users={users} />
         </Dialog>           
        
       </main>
