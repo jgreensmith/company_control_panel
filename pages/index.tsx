@@ -14,6 +14,8 @@ import styles from '../styles/Home.module.css'
 import { useContext, useState } from 'react';
 import { ModalContext } from '../utils/ModalContext';
 import Form from '../components/Form';
+import dbConnect from '../lib/dbConnect';
+import User from '../model/User';
 
 interface User {
   _id: string,
@@ -107,9 +109,9 @@ export default function Home({users}: any) {
 
 export const getServerSideProps = async () => {
   try {
-    const client = await clientPromise
+    await dbConnect()
      
-    const users = await client.db('test').collection('users').find({}).toArray()
+    const users = await User.find()
 
     return {
       props: {

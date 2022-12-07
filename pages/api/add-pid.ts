@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import dbConnect from "../../lib/dbConnect";
 import clientPromise from "../../lib/mongodb";
+import User from "../../model/User";
 
 const validatePid = (pid: string): boolean => {
     const regEx = /^[A-Za-z0-9]{8}$/
@@ -34,10 +36,10 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
                 return res.status(400).json(errorMessage)
             }
 
-            const client = await clientPromise
+            await dbConnect()
 
             // @ts-ignore
-            await client.db('test').collection('users').findOneAndUpdate({_id: {$eq: id}}, {
+            await User.findByIdAndUpdate({_id: id}, {
                 $set: {
                     pid: pid,
                     manage_inventory: inventory,
