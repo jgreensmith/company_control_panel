@@ -8,6 +8,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Dialog from '@mui/material/Dialog';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { MdError } from 'react-icons/md'
+
 
 import styles from '../styles/Home.module.css'
 import { useContext, useState } from 'react';
@@ -63,7 +66,8 @@ export default function Home({users}: any) {
             <Table sx={{ minWidth: { vs: 450 } }} >
                 <TableHead>
                     <TableRow>
-                    <TableCell>Email</TableCell>
+                    <TableCell>Sanity</TableCell>
+                    <TableCell align="right">Email</TableCell>
                     <TableCell align="right">Name</TableCell>
                     <TableCell align="right">Connected Account</TableCell>
                     <TableCell align="right">Customer Id</TableCell>
@@ -78,8 +82,17 @@ export default function Home({users}: any) {
                       sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
                     >
                         <TableCell component="th" scope="row">
-                        {user.email}
+                        {user.pid ? 
+                        <div>
+                          <BsFillCheckCircleFill color='green' />
+                        </div>
+                        : 
+                        <div>
+                          <MdError color='red' />
+                        </div>
+                        }
                         </TableCell>
+                        <TableCell align="right">{user.email}</TableCell>
                         <TableCell align="right">{user.name}</TableCell>
                         <TableCell align="right">{user.connectedAccount}</TableCell>
                         <TableCell align="right">{user.customerId}</TableCell>
