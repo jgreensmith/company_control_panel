@@ -40,7 +40,13 @@ const userSchema = new Schema({
   preview_mode: {
     type: String
   },
-  manage_inventory: {
+  encrypted_manage_inventory: {
+    type: String
+  },
+  auth_tag: {
+    type: String
+  },
+  iv: {
     type: String
   }
   

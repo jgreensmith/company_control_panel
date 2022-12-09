@@ -56,24 +56,10 @@ export default function Home({users}: any) {
   // const plopped = plop.computeSecret(plopped64, 'base64', 'hex')
    console.log(users)
 
-  const IV = randomBytes(16);
 
   const key = process.env.NEXT_PUBLIC_API_CIPHER_KEY
 
-  const encrypt = (apiKey: string) => {
-    //@ts-ignore
-    let cipher = createCipheriv('aes-256-gcm', Buffer.from(key, 'hex'), IV)
-    let encrypted = cipher.update(apiKey)
-    encrypted = Buffer.concat([encrypted, cipher.final()])
-    const authTag = cipher.getAuthTag()
-    return {
-      iv: IV.toString('hex'), 
-      encryptedData: encrypted.toString('hex'),   
-      authTag: authTag.toString('hex')
-    }
-  }
-  const secretPoop = encrypt("poopoo420")
-  console.log(secretPoop)
+  
 
   const decrypt = (apiKeyObj: ApiKeyObj) => {
     let iv = Buffer.from(apiKeyObj.iv, 'hex')
@@ -86,7 +72,6 @@ export default function Home({users}: any) {
     return  decryptedly.toString('utf-8')
    }
 
-   console.log(decrypt(secretPoop))
 
 
   return (
