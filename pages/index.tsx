@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { createCipheriv, createDecipheriv, createECDH, randomBytes } from 'crypto';
 import  Container from '@mui/material/Container';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,7 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Dialog from '@mui/material/Dialog';
 
-import clientPromise from '../lib/mongodb'
 import styles from '../styles/Home.module.css'
 import { useContext, useState } from 'react';
 import { ModalContext } from '../utils/ModalContext';
@@ -32,6 +32,12 @@ interface User {
   preview_mode?: string
 }
 
+interface ApiKeyObj {
+  iv: string,
+  encryptedData: string,
+  authTag: string
+}
+
 
 export default function Home({users}: any) {
 
@@ -43,8 +49,46 @@ export default function Home({users}: any) {
     setCurrentId(id)
   }
   
+  // const plop = createECDH('secp256k1')
+  // plop.generateKeys();
+  // const plopped64 = plop.getPublicKey().toString('base64')
 
-  console.log({users})
+  // const plopped = plop.computeSecret(plopped64, 'base64', 'hex')
+   console.log(users)
+
+  const IV = randomBytes(16);
+
+  const key = process.env.NEXT_PUBLIC_API_CIPHER_KEY
+
+  const encrypt = (apiKey: string) => {
+    //@ts-ignore
+    let cipher = createCipheriv('aes-256-gcm', Buffer.from(key, 'hex'), IV)
+    let encrypted = cipher.update(apiKey)
+    encrypted = Buffer.concat([encrypted, cipher.final()])
+    const authTag = cipher.getAuthTag()
+    return {
+      iv: IV.toString('hex'), 
+      encryptedData: encrypted.toString('hex'),   
+      authTag: authTag.toString('hex')
+    }
+  }
+  const secretPoop = encrypt("poopoo420")
+  console.log(secretPoop)
+
+  const decrypt = (apiKeyObj: ApiKeyObj) => {
+    let iv = Buffer.from(apiKeyObj.iv, 'hex')
+    let encryptedData = Buffer.from(apiKeyObj.encryptedData, 'hex')
+    //@ts-ignore
+    let decipher = createDecipheriv('aes-256-gcm', Buffer.from(key, 'hex'), iv)
+    decipher.setAuthTag(Buffer.from(apiKeyObj.authTag, 'hex'))
+    const decrypted = decipher.update(encryptedData)
+    const decryptedly = Buffer.concat([decrypted, decipher.final()])
+    return  decryptedly.toString('utf-8')
+   }
+
+   console.log(decrypt(secretPoop))
+
+
   return (
     <div className={styles.container}>
       <Head>

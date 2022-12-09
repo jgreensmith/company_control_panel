@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../lib/dbConnect";
-import clientPromise from "../../lib/mongodb";
 import User from "../../model/User";
 
 const validatePid = (pid: string): boolean => {
