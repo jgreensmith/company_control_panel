@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { createCipheriv, createDecipheriv, createECDH, randomBytes } from 'crypto';
 import  Container from '@mui/material/Container';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -32,11 +31,7 @@ interface User {
   preview_mode?: string
 }
 
-interface ApiKeyObj {
-  iv: string,
-  encryptedData: string,
-  authTag: string
-}
+
 
 
 export default function Home({users}: any) {
@@ -49,29 +44,8 @@ export default function Home({users}: any) {
     setCurrentId(id)
   }
   
-  // const plop = createECDH('secp256k1')
-  // plop.generateKeys();
-  // const plopped64 = plop.getPublicKey().toString('base64')
-
-  // const plopped = plop.computeSecret(plopped64, 'base64', 'hex')
-   console.log(users)
-
-
-  const key = process.env.NEXT_PUBLIC_API_CIPHER_KEY
-
   
-
-  const decrypt = (apiKeyObj: ApiKeyObj) => {
-    let iv = Buffer.from(apiKeyObj.iv, 'hex')
-    let encryptedData = Buffer.from(apiKeyObj.encryptedData, 'hex')
-    //@ts-ignore
-    let decipher = createDecipheriv('aes-256-gcm', Buffer.from(key, 'hex'), iv)
-    decipher.setAuthTag(Buffer.from(apiKeyObj.authTag, 'hex'))
-    const decrypted = decipher.update(encryptedData)
-    const decryptedly = Buffer.concat([decrypted, decipher.final()])
-    return  decryptedly.toString('utf-8')
-   }
-
+   console.log(users)
 
 
   return (
