@@ -4,7 +4,6 @@ import { Button, DialogActions, DialogContent, DialogTitle, Divider, FormControl
 
 import { ModalContext } from "../utils/ModalContext";
 import { FormBox, InputContainer } from "../utils/styles";
-import { setDefaultResultOrder } from "dns/promises";
 
 
 export default function Form ({users}: any) {
@@ -27,7 +26,7 @@ export default function Form ({users}: any) {
             previewMode: currentUser?.preview_mode ? currentUser.preview_mode : ''
         })
     }, [currentUser])
-
+ 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         
@@ -49,7 +48,7 @@ export default function Form ({users}: any) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch('/api/add-pid', {
+        await fetch('/api/add-pid', {
             method: 'POST',
             headers: {
               Accept: "application/json",
