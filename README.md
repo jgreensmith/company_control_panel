@@ -1,4 +1,4 @@
-## Nextjs e-ccommerce website builder (Control Panel)
+## Nextjs e-commerce website builder (Control Panel)
 
 This Repo is for company use only, it is where the Sanity Project Ids and API keys will be added to mongodb.
 
