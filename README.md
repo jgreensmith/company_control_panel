@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Nextjs e-ccommerce website builder (Control Panel)
 
-## Getting Started
+This Repo is for company use only, it is where the Sanity Project Ids and API keys will be added to mongodb.
 
-First, run the development server:
+React-icons are used to show confirmation of projectId and api keys for each user.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+React-modal is used to add or update Sanity data in mongodb.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<img width="528" alt="Screenshot 2023-01-09 at 23 55 23" src="https://user-images.githubusercontent.com/71337767/211431496-7f8f10c4-08ff-40e0-ab38-a3132f127126.png">
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## API encryption
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The api keys are used in the store front to manage the inventory of the sanity products, and for preview mode.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+manage inventory api key is read and write access, so encryption is good practice for storing in a database.
 
-## Learn More
+the project uses `crypt` for encryption
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img width="791" alt="Screenshot 2023-01-10 at 00 01 38" src="https://user-images.githubusercontent.com/71337767/211432081-32523d4d-33a4-4a62-b5db-a0f04f921d63.png">
