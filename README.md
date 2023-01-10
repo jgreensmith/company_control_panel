@@ -6,7 +6,7 @@ React-icons are used to show confirmation of projectId and api keys for each use
 
 React-modal is used to add or update Sanity data in mongodb.
 
-<img width="528" alt="Screenshot 2023-01-09 at 23 55 23" src="https://user-images.githubusercontent.com/71337767/211431496-7f8f10c4-08ff-40e0-ab38-a3132f127126.png">
+<img width="617" alt="Screenshot 2023-01-10 at 12 32 30" src="https://user-images.githubusercontent.com/71337767/211552657-a77a5054-bc05-41b1-bca2-c5d9a1f4a1ef.png">
 
 ## API encryption
 
